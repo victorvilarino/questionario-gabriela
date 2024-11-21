@@ -8,7 +8,7 @@
 
 
     <style>
-            body {
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -65,8 +65,10 @@
         button#nao {
             background-color: #f44336;
             color: white;
-            position: relative;
-            transition: background-color 0.3s ease;
+            border: 2px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, left 0.3s ease, top 0.3s ease;
         }
 
         button#nao:hover {
@@ -193,14 +195,30 @@
             if (resposta.toLowerCase() === "gabriela") {
                 // Oculta o popup ao acertar
                 popup.style.display = 'none';
-                alert('Parabéns! Você acertou!');
+                alert('Parabéns minha princesa! Minha pessoa mais linda do mundo.');
                 // Redirecione ou exiba outra tela aqui
                 window.location.href = "https://victorvilarino.github.io/declaracao-gabriela/"; 
             } else {
                 errorMessage.classList.remove('hidden');
             }
         });
-    </script>
+        botaoNao.style.left = "0px";
+    botaoNao.style.top = "0px";
+
+// Função para mover o botão "Não" aleatoriamente
+    botaoNao.addEventListener('click', () => {
+    const botaoWidth = botaoNao.offsetWidth;
+    const botaoHeight = botaoNao.offsetHeight;
+    const maxX = window.innerWidth - botaoWidth - 20;
+    const maxY = window.innerHeight - botaoHeight - 20;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    botaoNao.style.left = `${x}px`;
+    botaoNao.style.top = `${y}px`;
+});
+</script>
     
 </body>
 </html>
