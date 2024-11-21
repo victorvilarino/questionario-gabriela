@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEU PRESENTE DE NAMORO : ) </title>
+    <link rel="shortcut icon" href="imagens/Heart-icon.png" type="image/x-icon">
+
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url(/imagens/Hearts.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #d32f2f;
+            overflow-x: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 45px;
+            gap: 65px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button#sim {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button#sim:hover {
+            background-color: #45a049;
+        }
+
+        button#nao {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+            transition: background-color 0.3s ease;
+        }
+
+        button#nao:hover {
+            background-color: #d32f2f;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .popup h2 {
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .popup input {
+            padding: 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .popup button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .popup button:hover {
+            background-color: #45a049;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 20px;
+            }
+            button {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="initialContent">
+        <h1>Primeiramente... você me ama?</h1>
+        <div class="buttons">
+            <button id="sim">Sim</button>
+            <button id="nao">Não</button>
+        </div>
+        <p id="naoMessage" class="hidden">Você já não tem mais escolha. Kkkk</p>
+    </div>
+
+    <div class="popup" id="popup">
+        <h2>Dica: "A mulher mais linda do mundo."</h2>
+        <input type="text" id="resposta" placeholder="Digite a senha">
+        <button id="confirmar">Confirmar</button>
+        <p id="error-message" class="error-message hidden">Errou... É literalmente a pessoa MAIS linda :)</p>
+    </div>
+
+    <script>
+        const botaoSim = document.getElementById('sim');
+        const botaoNao = document.getElementById('nao');
+        const popup = document.getElementById('popup');
+        const container = document.getElementById('initialContent');
+        const botaoConfirmar = document.getElementById('confirmar');
+        const errorMessage = document.getElementById('error-message');
+        const naoMessage = document.getElementById('naoMessage');
+        let naoClickCount = 0;
+    
+        // Exibe a popup ao clicar no botão "Sim"
+        botaoSim.addEventListener('click', () => {
+            // Oculta o container inicial
+            container.style.display = 'none';
+            // Exibe a popup
+            popup.style.display = 'block';
+        });
+    
+        // Função para mover o botão "Não" aleatoriamente
+        botaoNao.addEventListener('click', () => {
+            naoClickCount++;
+            if (naoClickCount >= 2) {
+                naoMessage.classList.remove('hidden');
+            }
+    
+            const botaoWidth = botaoNao.offsetWidth;
+            const botaoHeight = botaoNao.offsetHeight;
+            const maxX = window.innerWidth - botaoWidth - 20;
+            const maxY = window.innerHeight - botaoHeight - 20;
+    
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+    
+            botaoNao.style.position = 'absolute';
+            botaoNao.style.left = `${x}px`;
+            botaoNao.style.top = `${y}px`;
+        });
+    
+        // Verifica a resposta correta e redireciona
+        botaoConfirmar.addEventListener('click', () => {
+            const resposta = document.getElementById('resposta').value.trim();
+            if (resposta.toLowerCase() === "gabriela") {
+                // Oculta o popup ao acertar
+                popup.style.display = 'none';
+                alert('Parabéns! Você acertou!');
+                // Redirecione ou exiba outra tela aqui
+                window.location.href = "https://victorvilarino.github.io/declaracao-gabriela/"; 
+            } else {
+                errorMessage.classList.remove('hidden');
+            }
+        });
+    </script>
+    
+</body>
+</html>
